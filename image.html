@@ -802,10 +802,19 @@
       showScreen('result-screen');
     }
 
+    // --- Global Error Catcher (Debugging ke liye) ---
+    window.addEventListener('error', function(e) {
+      alert("System Error: " + e.message + " (Line: " + e.lineno + ")");
+    });
+
     // --- Boot ---
-    window.onload = () => {
-      setImage(generateDefaultImage());
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        setImage(generateDefaultImage());
+      } catch (error) {
+        alert("Image load error: " + error.message);
+      }
+    });
   </script>
 </body>
 </html>
